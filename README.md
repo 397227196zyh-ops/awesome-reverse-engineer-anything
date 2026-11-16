@@ -35,7 +35,7 @@
 
 How each tag is checked: [How this list stays accurate](#how-this-list-stays-accurate).
 
-> Figures and links in this list were checked on 2026-10-21, with REA's star count refreshed on 2026-11-01, and the entries added since refreshed on 2026-11-12. REA and the projects around it move weekly, so read the date next to a number before relying on it.
+> Figures and links in this list were checked on 2026-10-21, with REA's star count refreshed on 2026-11-01, and the entries added since refreshed on 2026-11-16. REA and the projects around it move weekly, so read the date next to a number before relying on it.
 
 > ⚠️ Reverse engineering is governed by local law, software licenses and terms of service. This list covers only public information, for learning, research, interoperability and preservation. Make sure you are allowed to analyse the target. See [Legal and controversy](#legal-and-controversy).
 
@@ -170,6 +170,7 @@ Tags show the evidence source. Repo stars change daily, so they are not listed h
 - [Junhan2/reaproof](https://github.com/Junhan2/reaproof) - `AI-RE` Rates how exposed a shipped app is to agents such as REA, and closes what it can close: source maps carrying your original source, server keys, `.env` values and `.git` folders that ended up in the build output. Rates the result on its own "rea risk" scale and cross-checks its counts against `aapt`, `dexdump`, `readelf`, `otool` and `@electron/fuses` on 22 framework test apps. MIT.
 - [MockirDev/antirea](https://github.com/MockirDev/antirea) - `AI-RE` The defensive side: a skill that puts "stop" directives in the instruction files agents read first, plus terminal shims and build hardening. It only stops agents that respect those files, and the README makes no measured claims. MIT.
 - [qybaihe/bla](https://github.com/qybaihe/bla) - `REA` Counter-REA hardening for your own builds: it plants decoys and pushes artifacts past REA's documented resource budgets while keeping runtime behaviour the same. The README separates results measured by running real REA (capacity or budget errors on ASAR, WASM, Go, EVM, PCAP, SQLite, model files and more) from its benchmark's token and cost figures, which are internal estimates. Ghidra-based paths were not tested. MIT.
+- [i098/ReClarity](https://github.com/i098/ReClarity) - `REA` The counterpart to BLA: a skill and toolkit that keeps REA working on BLA-hardened builds by scanning for trap shapes, cleaning a duplicate of the build and checking by running it in a sandbox. In its recorded test, plain REA answered 0 of 3 questions and REA + ReClarity 3 of 3; the README says that was one run, one model and one BLA seed, and that auto-triggering does not work yet. MIT.
 - [davepartner/anti-reverse-engineer-anything](https://github.com/davepartner/anti-reverse-engineer-anything) - `AI-RE` AREA, another defensive toolkit aimed at REA and the tools it drives (Ghidra, Frida, LLDB, DevTools and others): it strips what builds leak and closes debugging channels, with obfuscation and anti-debug steps. The README makes no measured claims. MIT.
 - [KoNit-K/papertrade-research](https://github.com/KoNit-K/papertrade-research) - `REA` Independent research on Papertrade, a perpetual-futures protocol on HyperEVM: its frontend flows, contract bytecode, fees, liquidations and PAPER reward rules. REA cross-checks the client against the contracts, alongside the official docs and public code. Research preview, English and Chinese. Apache-2.0.
 
@@ -199,6 +200,7 @@ These projects came up alongside REA. Their READMEs do not say REA was used, so 
 - [cognixws/picode-rea](https://github.com/cognixws/picode-rea) - PiCode extension enabling REA's static-analysis tools. Pins rea-agents 6.1.0; current is 6.7.0.
 - [pablodiazjorge/rea-casebook](https://github.com/pablodiazjorge/rea-casebook) - Claude Code mod that logs REA evidence and requires conclusions to cite real `evidence_id`s.
 - [laaielichter/reverseport](https://github.com/laaielichter/reverseport) - CLI + MCP for porting reverse-engineering results to Godot, Unity, Unreal and three.js. **Note:** its README says the analysis engine is "based on REA", and its notices say REA code is MIT-licensed. Treat it as a derivative of REA, not an independent tool.
+- [Hubupup/REA-ReverseEngineerAndroid](https://github.com/Hubupup/REA-ReverseEngineerAndroid) - Android-only hard fork of REA 6.8.0 with 117 MCP tools for APKs, device state, runtime behaviour and native libraries. Built from its own source, not updated from the `rea-agents` npm package, though it keeps REA's identifiers. MIT.
 - [Nowng/rea-mcp](https://github.com/Nowng/rea-mcp) - LM Studio plugin that wraps the original REA MCP server, for local models. It clones REA at runtime.
 - [sickpyramid/ReaFuse](https://github.com/sickpyramid/ReaFuse) - Builds on REA to fuse two JS/TS source projects. v0.1, alpha.
 - [dav1dngy/era-agent](https://github.com/dav1dngy/era-agent) - Evidence-driven reverse-engineering agent with a self-improvement lab. Experimental, v0.1.0.
@@ -261,7 +263,8 @@ Tools that REA drives, or tools in the same category.
 - [SubmitGame/awesome-decomp-games](https://github.com/SubmitGame/awesome-decomp-games) - Decompiled games, many playable in the browser. CC0-1.0.
 - [morluto/awesome-reverse-engineering](https://github.com/morluto/awesome-reverse-engineering) - Curated general reverse-engineering tools and learning resources for binaries, applications, firmware, file formats and protocols, maintained by REA's own author. Organised by the task you want to do rather than by tool. It already runs its own weekly link check in CI. CC0-1.0.
 - [reacher-z/Awesome-REA](https://github.com/reacher-z/Awesome-REA) - Bilingual catalogue of reverse-engineering tools, reconstruction projects, case studies and research papers across websites, games, apps, binaries, firmware and protocols, with a searchable site and a separately labelled automated repository index. MIT.
-- [EnzoVezzaro/rea-faang](https://github.com/EnzoVezzaro/rea-faang) - Product catalog for agent-led clean-room rebuilding: 193 product dossiers, candidate open-source alternatives, and portable build skills.
+- [EnzoVezzaro/rea-faang](https://github.com/EnzoVezzaro/rea-faang) - Product catalog for agent-led clean-room rebuilding: 193 product dossiers, candidate open-source alternatives, and portable build skills. MIT.
+- [Reversed with AI](https://reversedwithai.com) - Directory of AI-assisted reverse-engineering projects (games, firmware, protocols, apps), over 800 so far, each with the model used, the outcome, the author's reported time and cost, and a link to its source. Has setup guides, a news feed, a free keyless JSON/CSV API and a list of playable AI-decompiled games. Anyone can submit. Data under CC BY 4.0. Sells sponsored placements. REA is not required.
 
 ## Discussion and press
 
