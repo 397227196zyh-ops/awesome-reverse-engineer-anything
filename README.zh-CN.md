@@ -248,6 +248,7 @@ REA 编排的底层工具，或同类的"给 Agent 用的逆向工具"。
 - [Fanqi89/dsh-craft-anything](https://github.com/Fanqi89/dsh-craft-anything) - DeepSeek Harness 插件，把本地 Craft Anything CLI 接成 `mcp__craft__*` 工具，可切换净室模式和深度模式。作者也做了 REA 的插件包 Fanqi89/dsh-rea。MIT。
 - [JuneYaooo/rea-video](https://github.com/JuneYaooo/rea-video) - `AI 逆向` 给 Claude Code、Codex 用的技能和 CLI，逐镜头拆解视频：判断每个镜头是实拍、AI 生成还是代码生成，反推提示词，并给出复刻方案。**虽然名字带 REA，但和 morluto/rea 无关**，它分析的是视频而不是软件。Apache-2.0。
 - [N0zoM1z0/touhou-reverse-engineering](https://github.com/N0zoM1z0/touhou-reverse-engineering) - `AI 逆向` 基于 IDA Pro + Codex 的逆向笔记，以证据为先，记录运行时补丁等实验。README 未提 REA。
+- [emirmrkaljevic/usb-rea](https://github.com/emirmrkaljevic/usb-rea) - `AI 逆向` USB 协议逆向的 MCP 服务器和 CLI：一边使用设备的 Windows 厂商软件一边抓包（pcap/pcapng），它解码传输、推断命令结构并生成 Linux 用户态驱动。**虽然名字带 rea，但和 morluto/rea 无关**。MIT。
 
 ## 其他列表
 

@@ -243,6 +243,7 @@ Tools that REA drives, or tools in the same category.
 - [Fanqi89/dsh-craft-anything](https://github.com/Fanqi89/dsh-craft-anything) - DeepSeek Harness plugin that bridges the local Craft Anything CLI as `mcp__craft__*` tools, with a clean-room / deep mode switch. Same author as the REA bundle Fanqi89/dsh-rea. MIT.
 - [JuneYaooo/rea-video](https://github.com/JuneYaooo/rea-video) - `AI-RE` Agent skill and CLI (Claude Code, Codex) that reverse-engineers a video shot by shot: whether each shot was filmed, AI-generated or coded, the likely prompts, and a remake plan. **Not related to morluto/rea** despite the name; it analyses videos, not software. Apache-2.0.
 - [N0zoM1z0/touhou-reverse-engineering](https://github.com/N0zoM1z0/touhou-reverse-engineering) - `AI-RE` Evidence-first IDA + Codex notes, including runtime patch experiments. No REA mention.
+- [emirmrkaljevic/usb-rea](https://github.com/emirmrkaljevic/usb-rea) - `AI-RE` MCP server and CLI for USB protocol reverse engineering: capture traffic (pcap/pcapng) while you use a device's Windows vendor app, it decodes the transfers, infers the command structure and generates a Linux userspace driver. **Not related to morluto/rea** despite the name. MIT.
 
 ## Other lists
 
