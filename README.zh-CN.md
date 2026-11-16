@@ -35,7 +35,7 @@
 
 每个标签怎么核对，见[这份列表怎么保证准确](#这份列表怎么保证准确)。
 
-> 本列表中的数据与链接核对于 2026-10-21，REA 星数更新于 2026-11-01，此后新增的条目更新于 2026-11-12。REA 及其周边项目每周都在变化，引用某个数字前请先看它旁边的日期。
+> 本列表中的数据与链接核对于 2026-10-21，REA 星数更新于 2026-11-01，此后新增的条目更新于 2026-11-16。REA 及其周边项目每周都在变化，引用某个数字前请先看它旁边的日期。
 
 ## 今天就能用
 
@@ -174,6 +174,7 @@
 - [Junhan2/reaproof](https://github.com/Junhan2/reaproof) - `AI 逆向` 评估你发布的应用对 REA 这类 Agent 暴露到什么程度，并修掉能修的部分：带着原始源码的 source map、服务端密钥、`.env` 的值、混进构建产物的 `.git` 目录。用自带的 "rea risk" 等级给出结论，并在 22 个框架测试应用上用 `aapt`、`dexdump`、`readelf`、`otool`、`@electron/fuses` 交叉核对计数。MIT。
 - [MockirDev/antirea](https://github.com/MockirDev/antirea) - `AI 逆向` 防守方的工具：在 Agent 最先读取的指令文件里放"停止"指令，再加终端 shim 和构建加固。只对遵守这些文件的 Agent 有效，README 没有给出实测数据。MIT。
 - [qybaihe/bla](https://github.com/qybaihe/bla) - `REA` 针对 REA 的防护加固，用于你自己发布的产物：植入诱饵，把产物推过 REA 文档里写明的资源上限，同时保持运行行为不变。README 把用真实 REA 跑出的结果（ASAR、WASM、Go、EVM、PCAP、SQLite、模型文件等格式触发容量或预算错误）和基准测试里的 token 与费用数字分开写明，后者是内部估算。基于 Ghidra 的路径没有测试。MIT。
+- [i098/ReClarity](https://github.com/i098/ReClarity) - `REA` 与 BLA 针锋相对：一套技能和工具，扫描陷阱形态、清理副本、在沙箱中实际运行验证，让 REA 在经过 BLA 加固的构建上继续工作。录制的测试里，单用 REA 3 题答对 0 题，REA + ReClarity 答对 3 题；README 说明这只是一次运行、一个模型、一个 BLA 种子，而且自动触发还不能用。MIT。
 - [davepartner/anti-reverse-engineer-anything](https://github.com/davepartner/anti-reverse-engineer-anything) - `AI 逆向` AREA，又一个针对 REA 及其调用的工具（Ghidra、Frida、LLDB、DevTools 等）的防护工具包：去掉构建产物里泄露的信息、关闭调试通道，并提供混淆和反调试。README 没有给出实测数据。MIT。
 - [KoNit-K/papertrade-research](https://github.com/KoNit-K/papertrade-research) - `REA` 对 HyperEVM 上的永续合约协议 Papertrade 的独立研究：前端流程、合约字节码、费用、清算和 PAPER 奖励规则。REA 用来对照客户端与合约，同时参考官方文档和公开代码。研究预览版，中英双语。Apache-2.0。
 
@@ -204,6 +205,7 @@
 - [cognixws/picode-rea](https://github.com/cognixws/picode-rea) - PiCode 扩展，只启用 REA 的静态分析工具。当前版本固定为 rea-agents 6.1.0，最新为 6.7.0。
 - [pablodiazjorge/rea-casebook](https://github.com/pablodiazjorge/rea-casebook) - Claude Code mod，实时记录 REA 返回的证据，要求结论必须引用真实的 `evidence_id`，可导出 Markdown。
 - [laaielichter/reverseport](https://github.com/laaielichter/reverseport) - 把逆向结果移植到 Godot、Unity、Unreal、three.js 的 CLI + MCP。**注意**：README 写明其深度分析引擎"基于 REA"，THIRD_PARTY_NOTICES 也称 REA 代码以 MIT 授权，它更像是 REA 的衍生版本，而不是独立工具。
+- [Hubupup/REA-ReverseEngineerAndroid](https://github.com/Hubupup/REA-ReverseEngineerAndroid) - 基于 REA 6.8.0 的 Android 专用硬分支，提供 117 个 MCP 工具，覆盖 APK、设备状态、运行时行为和原生库。从自己的源码构建，不跟随 `rea-agents` npm 包更新，但沿用了 REA 的标识符。MIT。
 - [Nowng/rea-mcp](https://github.com/Nowng/rea-mcp) - LM Studio 插件，封装原版 REA MCP Server，方便接本地模型。运行时会克隆 REA。
 - [sickpyramid/ReaFuse](https://github.com/sickpyramid/ReaFuse) - 基于 REA 拆解两个 JS/TS 源码项目、融合它们的能力，生成新项目并验证。v0.1，Alpha。
 - [dav1dngy/era-agent](https://github.com/dav1dngy/era-agent) - 基于 REA 的逆向 Agent，加入以证据驱动的自我改进实验室。实验性，v0.1.0。
@@ -266,7 +268,8 @@ REA 编排的底层工具，或同类的"给 Agent 用的逆向工具"。
 - [SubmitGame/awesome-decomp-games](https://github.com/SubmitGame/awesome-decomp-games) - 英文，反编译游戏，首屏即可在浏览器中直接游玩，CC0 许可。
 - [morluto/awesome-reverse-engineering](https://github.com/morluto/awesome-reverse-engineering) - 由 REA 作者本人维护的通用逆向工程工具与学习资源列表，覆盖二进制、应用、固件、文件格式与协议。按"你想做什么任务"而不是按工具分类。它自己已经跑每周一次的链接检查 CI。CC0-1.0。
 - [reacher-z/Awesome-REA](https://github.com/reacher-z/Awesome-REA) - 中英双语的逆向工程工具、复原项目、案例与研究论文目录，覆盖网站、游戏、应用、二进制、固件与通信协议，带可搜索站点和单独标注的自动化仓库索引。MIT。
-- [EnzoVezzaro/rea-faang](https://github.com/EnzoVezzaro/rea-faang) - 面向 Agent 驱动的洁净室重建产品目录：包含 193 个产品档案、候选开源替代品和可移植的构建技能。
+- [EnzoVezzaro/rea-faang](https://github.com/EnzoVezzaro/rea-faang) - 面向 Agent 驱动的洁净室重建产品目录：包含 193 个产品档案、候选开源替代品和可移植的构建技能。MIT。
+- [Reversed with AI](https://reversedwithai.com) - AI 辅助逆向工程项目目录（游戏、固件、协议、应用），目前已有 800 多个项目，每条记录所用模型、结果、作者报告的耗时与成本及原始来源链接。另有配置指南、新闻动态、免费免密钥的 JSON/CSV API 和可游玩的 AI 反编译游戏列表。任何人都可提交。数据以 CC BY 4.0 开放。网站出售赞助展位。不要求使用 REA。
 
 ## 社区讨论与媒体
 
