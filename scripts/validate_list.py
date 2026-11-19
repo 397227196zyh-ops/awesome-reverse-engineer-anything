@@ -14,6 +14,7 @@ The list has three kinds of line and they are held to different rules:
 
 Checks:
 
+  0. census     how many entries were examined, so a clean run has a denominator
   1. tags       every case carries a tag from the documented set
   2. licenses   every case states its license, or says plainly that there is none
   3. coverage   every case tagged REA has a row in docs/is-it-rea.md
@@ -94,6 +95,17 @@ TAGS = {
 # A tag may be qualified: `REA (showcase)`, `REA (partial)`, `REA (author's post)`.
 TAG_RE = re.compile(r"`([^`]+)`")
 
+# A tag may be qualified. The English list writes `REA (showcase)`; the Chinese
+# list writes `REA（部分）` with full-width parentheses, which is correct
+# punctuation for that language. Both mean the same tag, so the qualifier is
+# stripped on either bracket.
+TAG_QUALIFIER = re.compile(r"[(（]")
+
+
+def unqualified(tag: str) -> str:
+    """The bare tag name, with any qualifier removed."""
+    return TAG_QUALIFIER.split(tag, maxsplit=1)[0].strip()
+
 LICENSE_PATTERNS = [
     re.compile(r"\bMIT\b", re.I),
     re.compile(r"Apache-2\.0", re.I),
@@ -173,13 +185,27 @@ def all_links(path: Path) -> set[str]:
 
 
 class Entry:
-    def __init__(self, file: str, line_no: int, name: str, url: str, text: str, section: str):
+    def __init__(
+        self,
+        file: str,
+        line_no: int,
+        name: str,
+        url: str,
+        text: str,
+        section: str,
+        headings: tuple[str, ...] = (),
+    ):
         self.file = file
         self.line_no = line_no
         self.name = name
         self.url = url
         self.text = text
         self.section = section
+        # Every heading above this entry, outermost first. A case section is a
+        # container: its entries sit under ### subsections, so an entry under
+        # "Games and reconstructions" only counts as a case because of the
+        # "Community cases built with REA" heading above it.
+        self.headings = headings or (section,)
         self.tags: list[str] = []
         self.has_license = False
 
@@ -193,7 +219,7 @@ class Entry:
 
     @property
     def is_case(self) -> bool:
-        return self.section.lower() in CASE_SECTIONS
+        return any(heading.lower() in CASE_SECTIONS for heading in self.headings)
 
     def __repr__(self) -> str:  # pragma: no cover - debugging aid
         return f"<Entry {self.file}:{self.line_no} {self.repo or self.url} {self.tag}>"
@@ -204,10 +230,15 @@ def parse_file(path: Path) -> tuple[list[Entry], set[str]]:
     entries: list[Entry] = []
     all_repos: set[str] = set()
     section = "(top)"
+    stack: list[tuple[int, str]] = []
     for line_no, raw in enumerate(read(path).splitlines(), start=1):
         heading = HEADING.match(raw)
         if heading:
+            level = len(heading.group(1))
             section = heading.group(2).strip()
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            stack.append((level, section))
             continue
 
         links = LINK.findall(raw)
@@ -226,7 +257,10 @@ def parse_file(path: Path) -> tuple[list[Entry], set[str]]:
                 continue
         name, url = first
         text = raw
-        entries.append(Entry(path.name, line_no, name, url, text, section))
+        entries.append(
+            Entry(path.name, line_no, name, url, text, section,
+                  tuple(title for _, title in stack))
+        )
     return entries, all_repos
 
 
@@ -234,8 +268,7 @@ def attach_metadata(entries: list[Entry]) -> None:
     for entry in entries:
         for match in TAG_RE.finditer(entry.text):
             candidate = match.group(1).strip()
-            base = candidate.split("(")[0].strip()
-            if candidate in TAGS or base in TAGS:
+            if candidate in TAGS or unqualified(candidate) in TAGS:
                 entry.tags.append(candidate)
         entry.has_license = any(p.search(entry.text) for p in LICENSE_PATTERNS)
 
@@ -371,7 +404,7 @@ def main() -> int:
         for entry in entries_by_file.get(readme, []):
             if entry.repo is None or not entry.is_case or not entry.tags:
                 continue
-            if entry.tag.split("(")[0].strip() != "REA":
+            if unqualified(entry.tag) != "REA":
                 continue
             if entry.repo == UPSTREAM:
                 continue
@@ -465,8 +498,28 @@ def main() -> int:
                     f"document that also exists in English. Link the English file."
                 )
 
+    # How much did this run actually look at? A count of errors without its
+    # denominator cannot be distinguished from a run that inspected nothing.
+    entries_seen = sum(len(v) for v in entries_by_file.values())
+    cases_seen = [
+        e
+        for name in (EN_README, ZH_README)
+        for e in entries_by_file.get(name, [])
+        if e.is_case
+    ]
+    cases_with_repo = [e for e in cases_seen if e.repo is not None]
+
+    census = {
+        "files": len(files),
+        "entries": entries_seen,
+        "case_entries": len(cases_seen),
+        "case_entries_with_repo": len(cases_with_repo),
+        "errors": len(errors),
+        "warnings": len(warnings),
+    }
+
     if args.json:
-        print(json.dumps({"errors": errors, "warnings": warnings}, indent=2))
+        print(json.dumps({"census": census, "errors": errors, "warnings": warnings}, indent=2))
         return 1 if errors else 0
 
     for message in errors:
@@ -474,6 +527,11 @@ def main() -> int:
     for message in warnings:
         print(f"WARNING {message}")
     print()
+    print(
+        f"examined {census['entries']} entries in {census['files']} files; "
+        f"{census['case_entries']} are cases, "
+        f"{census['case_entries_with_repo']} of them link a GitHub repo"
+    )
     print(f"{len(errors)} error(s), {len(warnings)} warning(s)")
     return 1 if errors else 0
 
