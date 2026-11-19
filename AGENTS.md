@@ -43,6 +43,8 @@ Chinese tags: `REA`, `AI 逆向`, `重写`, `待核实`, `手工逆向`.
 | Official showcases                    | cases on `rea.tools/showcase/`                           |
 | Community cases built with REA        | cases whose source says REA was used                     |
 | The wider wave                        | AI work that says nothing about REA, or uses other tools |
+| Static recompilation                  | AI-written static recompilations of games, own copy only |
+| Behaviour-checked rewrites            | rewrites checked step by step against recorded behaviour |
 | Plugins and integrations              | adapters, plugins, skills, packaging                     |
 | Guides and research                   | write-ups, labs, deep research                           |
 | Related MCP reverse-engineering tools | tools in the same category as REA                        |

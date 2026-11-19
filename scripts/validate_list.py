@@ -55,9 +55,13 @@ DOC_PAIRS = [
 CASE_SECTIONS = {
     "community cases built with rea",
     "the wider wave: without confirmed rea",
+    "static recompilation: games rebuilt as native code",
+    "behaviour-checked rewrites",
     "official showcases",
     "社区案例：用 rea 做出来的东西",
     "同一波浪潮：未写明使用 rea 的 ai 逆向项目",
+    "静态重编译：把游戏翻译成原生程序",
+    "行为对照式重写",
     "官方案例",
 }
 

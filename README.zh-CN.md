@@ -86,6 +86,8 @@
 - [官方案例](#官方案例)
 - [社区案例：用 REA 做出来的东西](#社区案例用-rea-做出来的东西)
 - [同一波浪潮：未写明使用 REA 的 AI 逆向项目](#同一波浪潮未写明使用-rea-的-ai-逆向项目)
+- [静态重编译：把游戏翻译成原生程序](#静态重编译把游戏翻译成原生程序)
+- [行为对照式重写](#行为对照式重写)
 - [插件与集成](#插件与集成)
 - [教程与深度调研](#教程与深度调研)
 - [相关 MCP 逆向工具](#相关-mcp-逆向工具)
@@ -195,6 +197,25 @@
 - [RongleCat/grok-bot-sdk](https://github.com/RongleCat/grok-bot-sdk) - `手工逆向` 非官方 Node.js SDK，复现 Grok Bot 0.78.1 桌面客户端的登录、读取、发送和回复流接口。不是 xAI 或 Cursor 的产品。MIT。
 - [ArvinYin1/grokbot-animation-anatomy](https://github.com/ArvinYin1/grokbot-animation-anatomy) - `手工逆向` Grok Bot 头像动画引擎的可交互讲解页，来自对应用 `app.asar` 的静态分析：逐行移植的引擎与原版逐帧对照，另附提取出的动画数据（53 种状态）。仅供学习，提取的数据归原作者所有。MIT。
 - [jeremy-prt/bloub](https://github.com/jeremy-prt/bloub) - `重写` 用 SVG 复刻 x.ai bot 头像的 14 种状态，所有常数都从参考视频里逐帧量出，没有取自应用本身。MIT 只覆盖代码，不覆盖设计。
+
+## 静态重编译：把游戏翻译成原生程序
+
+静态重编译是提前把游戏的机器码翻译成 C 或 C++，再编译成原生程序，运行时不需要模拟器。2026 年 10 月底以来出现了一批这样的移植，大部分代码由 AI 编程 Agent 写成，所以收在这里。它们都不附带游戏文件：游戏要在你自己的电脑上、用你自己合法导出的副本构建，构建结果不能分享。主机厂商过去曾对模拟器项目采取法律行动，请先读[合规与争议](#合规与争议)。AI 参与的证据来自项目 README，或注明的提交记录（Co-Authored-By）。Star 数为 2026-11-19 的数据。另有 60 个按设备整理的 Switch 和 Switch 2 移植，见[其他列表](#其他列表)里的姊妹清单 awesome-switch-recomp。
+
+- [seedds/nxnative](https://github.com/seedds/nxnative) - `AI 逆向` 让你自己的 Switch 和 Switch 2 游戏在 Apple 芯片的 Mac、iPhone 和 iPad 上原生运行：NSO 重写器、Horizon HLE 宿主，NVN 在 Metal 上重建，一个脚本把游戏打包成 Mac 应用或未签名 IPA。仓库有 AGENTS.md 和面向 Agent 的调试指南，部分提交由 Claude 共同署名。约 1.6 万 Star。MIT。
+- [jhaizhou-ops/S2Arm](https://github.com/jhaizhou-ops/S2Arm) - `AI 逆向` 把 Switch 游戏重写成原生 ARM64，跑在 iPhone、iPad 和 Mac 上，图形直通 Metal，整个游戏库放在一个应用里；Mac 和 Windows 都有图形启动器，也可以交给 AI 助手操作。基于 nxnative 和 Ryujinx。约 7,300 个提交中有 3,000 多个由 Claude 共同署名，并有一份 [LLM 使用政策](https://github.com/jhaizhou-ops/S2Arm/blob/main/LLM_POLICY.md)。游戏和密钥需自备。约 3,700 Star。Apache-2.0。
+- [valentderah/totk-pc-recomp](https://github.com/valentderah/totk-pc-recomp) - `AI 逆向` 《塞尔达传说：王国之泪》重编译为原生 Windows 和 Linux x86-64 程序，使用 Vulkan 渲染。README 说大部分代码和文档由 Claude Code 在维护者指导下写成。它的 AArch64 到 C 的转换器是后来好几个移植的基础。约 7,700 Star。MIT。
+- [adriadam10/mkw-recomp](https://github.com/adriadam10/mkw-recomp) - `AI 逆向` 《马力欧卡丁车 世界》（Switch 2）重编译为原生 Linux 和 Windows 程序：AArch64 提前翻译成 C，NVN2 在 Vulkan 上重新实现，SM86 着色器翻译成 SPIR-V。README 的 "How it was made" 写明大约十天里大部分代码由 Claude 写成，每个改动都经过测量或测试。仍在早期：部分菜单还要修，没有联机。约 1,500 Star。MIT。
+- [sostenesfreitas/ocarina-recomp](https://github.com/sostenesfreitas/ocarina-recomp) - `AI 逆向` 🇧🇷 《时之笛》（Switch 2 重制版）在 Windows 上原生运行，用你自己的副本构建。仓库有 CLAUDE.md，一半以上的提交由 Claude 共同署名。实验性质，只在一台电脑上测过；2026 年 11 月起作者推荐改用 Hookshot 移植来玩，本仓库保留为葡萄牙语答疑点。约 1,200 Star。GPL-3.0。
+- [pixl27/ProjectReLink](https://github.com/pixl27/ProjectReLink) - `手工逆向` Switch 2 版《时之笛》重制版的另一个原生 Windows 重编译，只支持一个确定的游戏版本，安装器会在你的电脑上用 10 到 45 分钟构建游戏。README 没有提到任何 AI 工具。约 470 Star。GPL-3.0-or-later。
+- [sp00nznet/ps3recomp](https://github.com/sp00nznet/ps3recomp) - `AI 逆向` 把 PlayStation 3 游戏（PPU 和 SPU 代码）静态重编译成原生 PC 程序所需的运行库、系统桩和分析工具。数百个提交由 Claude 共同署名。约 700 Star。MIT。
+- [bc160201983/GoW-Ascension-Recomp](https://github.com/bc160201983/GoW-Ascension-Recomp) - `AI 逆向` 《战神：升天》（PS3 欧版光盘 1.00）基于 ps3recomp 重编译为原生 Windows 程序，Direct3D 12 渲染，多人模式走社区自建服务器。几乎所有提交都由 Claude 共同署名。作者已表示无法继续维护。约 190 Star。移植本身的代码为 MIT，启动器中有一个文件是 GPL-2.0。
+
+## 行为对照式重写
+
+每一步都和原程序录下来的行为做对照的重写，Agent 不会越改越偏。同样的思路也见于[同一波浪潮](#同一波浪潮未写明使用-rea-的-ai-逆向项目)里的 rook（以 Roblox Studio 录制结果做测试）和 zx-reaper，以及[桌面应用与工具复刻](#桌面应用与工具复刻)里给每个基于 REA 的重建都跑差分测试的 feature-heist。
+
+- [erkamyaman/rust-anything](https://github.com/erkamyaman/rust-anything) - `重写` 把应用一块一块地重写成 Rust：先录下原来的 Node.js、Python、C、Go、Ruby 或 Java 程序返回什么、抛出什么，由你的编程 Agent 写 Rust，每一块都要和录制结果逐一回放对照通过才继续，直到整个应用变成纯 Rust。代表案例是 Prettier 的 Rust 移植，17,224 次录制运行逐字节一致，快约 19 倍。支持 Claude Code、Codex、Cursor、Gemini CLI 和 OpenCode。重写的是你手里有源码的程序，所以不算逆向；它只能发现录制覆盖到的差异。约 4,400 Star（2026-11-19）。MIT。
 
 ## 插件与集成
 
