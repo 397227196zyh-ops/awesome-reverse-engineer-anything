@@ -122,6 +122,8 @@ Tags show the evidence source. Repo stars change daily, so they are not listed h
 
 ### Games and reconstructions
 
+- [Xrepo/should-fail-ci](https://github.com/Xrepo/should-fail-ci) - no tag and no licence; this used to slip through.
+
 - [N0zoM1z0/dx-ball](https://github.com/N0zoM1z0/dx-ball) - `REA` Reconstruction of English DX-Ball 1.07 in C/C++, which the README says used REA. Alpha, MIT. The author is also a contributor to REA, so this is a first-party case.
 - [N0zoM1z0/th04](https://github.com/N0zoM1z0/th04) - `REA (showcase)` Source reconstruction of *Touhou 4* (PC-98), built on ReC98 and checked against Turbo C++ 4.0J. The README does not mention REA; see the showcase above. MIT.
 - [N0zoM1z0's Touhou series](https://github.com/N0zoM1z0?tab=repositories): [th08](https://github.com/N0zoM1z0/th08), [th105](https://github.com/N0zoM1z0/th105), [th095](https://github.com/N0zoM1z0/th095), [th09](https://github.com/N0zoM1z0/th09), [th10](https://github.com/N0zoM1z0/th10), [th08-web](https://github.com/N0zoM1z0/th08-web), and [touhou-reconstruction-factory](https://github.com/N0zoM1z0/touhou-reconstruction-factory) - `AI-RE` Agent-driven reconstructions using Codex or GPT-web with IDA MCP or Ghidra. None of these READMEs mentions REA.

@@ -126,6 +126,8 @@
 
 ### 经典游戏复原
 
+- [Xrepo/should-fail-ci](https://github.com/Xrepo/should-fail-ci) - no tag and no licence; this used to slip through.
+
 - [N0zoM1z0/dx-ball](https://github.com/N0zoM1z0/dx-ball) - `REA` 复原英文版 DX-Ball 1.07 的 C/C++ 代码，README 写明用了 REA。这是官方案例对应的完整仓库，作者同为 REA 的合作开发者。Alpha，MIT。
 - [N0zoM1z0/th04](https://github.com/N0zoM1z0/th04) - `REA（官方案例）` 《东方幻想乡》PC-98 版源码复原，基于 ReC98 和 Turbo C++ 4.0J 编译比对。README 未提 REA，REA 的用法见上方官方案例。MIT。
 - [N0zoM1z0 的东方 Project 复原系列](https://github.com/N0zoM1z0?tab=repositories) - `AI 逆向` 用 Agent 工作流复原的 [th08](https://github.com/N0zoM1z0/th08)、[th105](https://github.com/N0zoM1z0/th105)、[th095](https://github.com/N0zoM1z0/th095)、[th09](https://github.com/N0zoM1z0/th09)、[th10](https://github.com/N0zoM1z0/th10)、从源码移植到浏览器的 [th08-web](https://github.com/N0zoM1z0/th08-web)，以及统一管理这些工程的 [touhou-reconstruction-factory](https://github.com/N0zoM1z0/touhou-reconstruction-factory)。这些 README 都没有提到 REA，用的是 Codex / GPT-web 加 IDA MCP 或 Ghidra。
