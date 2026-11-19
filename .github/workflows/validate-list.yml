@@ -1,8 +1,10 @@
+# Probe copy: this file is only used on a fork branch to run the project's own
+# validator on the patched tree. It is deliberately NOT part of the pull request.
 name: Validate list
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
     paths:
       - '**/*.md'
       - 'scripts/validate_list.py'
