@@ -82,6 +82,8 @@ Ran your own comparison? [Submit it](https://github.com/AIshihzong/awesome-rever
 - [Official showcases](#official-showcases)
 - [Community cases built with REA](#community-cases-built-with-rea)
 - [The wider wave: without confirmed REA](#the-wider-wave-without-confirmed-rea)
+- [Static recompilation: games rebuilt as native code](#static-recompilation-games-rebuilt-as-native-code)
+- [Behaviour-checked rewrites](#behaviour-checked-rewrites)
 - [Plugins and integrations](#plugins-and-integrations)
 - [Guides and research](#guides-and-research)
 - [Related MCP reverse-engineering tools](#related-mcp-reverse-engineering-tools)
@@ -190,6 +192,25 @@ These projects came up alongside REA. Their READMEs do not say REA was used, so 
 - [RongleCat/grok-bot-sdk](https://github.com/RongleCat/grok-bot-sdk) - `Manual RE` Unofficial Node.js SDK that reproduces the Grok Bot 0.78.1 desktop client's login, read, send and reply-stream calls. Not an xAI or Cursor product. MIT.
 - [ArvinYin1/grokbot-animation-anatomy](https://github.com/ArvinYin1/grokbot-animation-anatomy) - `Manual RE` Interactive explainer of the Grok Bot avatar engine, from static analysis of the app's `app.asar`: a line-level port checked frame by frame against the original, plus extracted animation data (53 states). Study use only; extracted data stays with its owners. MIT.
 - [jeremy-prt/bloub](https://github.com/jeremy-prt/bloub) - `Rebuild` SVG recreation of the x.ai bot avatar's 14 states, with every constant measured off a reference video rather than taken from the app. MIT for the code, not the design.
+
+## Static recompilation: games rebuilt as native code
+
+Static recompilation translates a game's machine code into C or C++ ahead of time and compiles it into a native program, with no emulator at run time. Since late October 2026 a wave of these ports has been written largely by AI coding agents, which is why they are here. None of them ships game files: each one builds the game on your machine from your own legally dumped copy, and the result must not be shared. Platform holders have taken legal action against console emulation before, so read the [legal section](#legal-and-controversy). The AI evidence is the project's README or, where noted, its commit trailers. Star counts are from 2026-11-19. For 60 more Switch and Switch 2 ports, sorted by device, see the sister list awesome-switch-recomp under [Other lists](#other-lists).
+
+- [seedds/nxnative](https://github.com/seedds/nxnative) - `AI-RE` Your own Switch and Switch 2 games running natively on Apple silicon Macs, iPhone and iPad: an NSO rewriter, a Horizon HLE host and NVN rebuilt on Metal, with one script that packs a game into a Mac app or an unsigned IPA. The repo has an AGENTS.md and an agent bring-up guide, and some commits are co-authored by Claude. About 16k stars. MIT.
+- [jhaizhou-ops/S2Arm](https://github.com/jhaizhou-ops/S2Arm) - `AI-RE` Switch games rewritten to native ARM64 for iPhone, iPad and Mac, graphics straight to Metal, one app for the whole library, with graphical launchers for Mac and Windows that an AI assistant can drive. Builds on nxnative and Ryujinx. More than 3,000 of its about 7,300 commits are co-authored by Claude, and it has an [LLM policy](https://github.com/jhaizhou-ops/S2Arm/blob/main/LLM_POLICY.md). Bring your own games and keys. About 3.7k stars. Apache-2.0.
+- [valentderah/totk-pc-recomp](https://github.com/valentderah/totk-pc-recomp) - `AI-RE` *The Legend of Zelda: Tears of the Kingdom* recompiled to native Windows and Linux x86-64 with a Vulkan renderer. The README says most of the code and documentation is written by Claude Code under the maintainer's direction. Its AArch64-to-C lifter is the base of several later ports. About 7.7k stars. MIT.
+- [adriadam10/mkw-recomp](https://github.com/adriadam10/mkw-recomp) - `AI-RE` *Mario Kart World* (Switch 2) recompiled to native Linux and Windows: AArch64 translated to C ahead of time, NVN2 reimplemented on Vulkan, SM86 shaders translated to SPIR-V. The README's "How it was made" says Claude did most of the typing over about ten days, with every change measured or tested. Early: some menus still need work and there is no online play. About 1.5k stars. MIT.
+- [sostenesfreitas/ocarina-recomp](https://github.com/sostenesfreitas/ocarina-recomp) - `AI-RE` 🇧🇷 *Ocarina of Time* (the Switch 2 remake) running natively on Windows, built from your own copy. The repo has a CLAUDE.md, and more than half of its commits are co-authored by Claude. Experimental and tested on one PC; since November 2026 the authors recommend the Hookshot port for playing and keep this repo as a Portuguese help point. About 1.2k stars. GPL-3.0.
+- [pixl27/ProjectReLink](https://github.com/pixl27/ProjectReLink) - `Manual RE` Another native Windows recompilation of the Switch 2 *Ocarina of Time* remake, for one exact game version, with an installer that builds the game on your PC in 10 to 45 minutes. The README names no AI tool. About 470 stars. GPL-3.0-or-later.
+- [sp00nznet/ps3recomp](https://github.com/sp00nznet/ps3recomp) - `AI-RE` Runtime libraries, system stubs and analysis tools for statically recompiling PlayStation 3 games (PPU and SPU) into native PC programs. Hundreds of its commits are co-authored by Claude. About 700 stars. MIT.
+- [bc160201983/GoW-Ascension-Recomp](https://github.com/bc160201983/GoW-Ascension-Recomp) - `AI-RE` *God of War: Ascension* (PS3, European disc 1.00) recompiled to native Windows on top of ps3recomp, with a Direct3D 12 renderer and community-run multiplayer servers. Almost every commit is co-authored by Claude. The author has said they cannot continue the project. About 190 stars. MIT for the port's own code; one launcher file is GPL-2.0.
+
+## Behaviour-checked rewrites
+
+A rewrite where every step is compared with recorded behaviour of the original program, so the agent cannot drift. The same idea appears in rook and zx-reaper under [The wider wave](#the-wider-wave-without-confirmed-rea), and in feature-heist under [Apps and tools](#apps-and-tools), which runs a differential test on every REA-based rebuild.
+
+- [erkamyaman/rust-anything](https://github.com/erkamyaman/rust-anything) - `Rebuild` Rewrites an app in Rust one piece at a time: it records what the original Node.js, Python, C, Go, Ruby or Java program returns or throws, your coding agent writes the Rust, and every piece is replayed against the recording before it moves on, until the app is pure Rust. Its showcase is a Prettier port that matches 17,224 recorded runs byte for byte, about 19 times faster. Works with Claude Code, Codex, Cursor, Gemini CLI and OpenCode. You rewrite code you have the source for, so this is not reverse engineering. It can only catch what the recording covers. About 4.4k stars (2026-11-19). MIT.
 
 ## Plugins and integrations
 
